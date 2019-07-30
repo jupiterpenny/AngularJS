@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="module">
+<head>
+    <title>MAIN</title>
+    <!--Add Angular-->
+    <script src="angular.min.js"></script>
+    <script src="angular-route.min.js"></script>
+
+
+
+    <!--My Controllers-->
+    <script type="text/javascript" src="module.js"></script>
+    <script type="text/javascript" src="mainController.js"></script>
+    <script type="text/javascript" src="github.js"></script>
+</head>
+<body>
+    <h1>THIS IS MAIN</h1>
+
+
+
+
+
+
+    <div ng-controller="MainController">
+   
+        <form name="findUser" ng-submit="search(username)">
+            <input type="search" require placeholder="Find User" ng-model="username" />
+            <input type="submit" value="search">
+        </form>
+        <p ng-hide="!error">Error: {{error}}</p>
+
+
+        <div>
+
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <p id="myUserData"> {{data}}</p>
+            <p>Repos:</p>
+
+            <select ng-model="repoSortOrder">
+                <option value="-language">Language</option>
+                <option value="+name">Name</option>
+                <option value="-stargazers_count">Stars</option>
+
+            </select>
+            <br>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Starts</th>
+                        <th>Language</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="repo in repos | orderBy:repoSortOrder">
+                        <td>{{repo.name}}</td>
+                        <td>{{repo.stargazers_count | number:1 }}</td>
+                        <td>{{repo.language}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+
+
+
+    </div>
+</body>
+</html>
